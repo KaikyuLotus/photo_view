@@ -24,6 +24,7 @@ class ImageWrapper extends StatefulWidget {
     required this.scaleStateCycle,
     required this.onTapUp,
     required this.onTapDown,
+    required this.onDoubleTap,
     required this.onScaleEnd,
     required this.outerSize,
     required this.gestureDetectorBehavior,
@@ -51,6 +52,7 @@ class ImageWrapper extends StatefulWidget {
   final ScaleStateCycle? scaleStateCycle;
   final PhotoViewImageTapUpCallback? onTapUp;
   final PhotoViewImageTapDownCallback? onTapDown;
+  final PhotoViewImageDoubleTapCallback? onDoubleTap;
   final PhotoViewImageScaleEndCallback? onScaleEnd;
   final Size outerSize;
   final HitTestBehavior? gestureDetectorBehavior;
@@ -192,6 +194,7 @@ class _ImageWrapperState extends State<ImageWrapper> {
       scaleBoundaries: scaleBoundaries,
       onTapUp: widget.onTapUp,
       onTapDown: widget.onTapDown,
+      onDoubleTap: widget.onDoubleTap,
       onScaleEnd: widget.onScaleEnd,
       gestureDetectorBehavior: widget.gestureDetectorBehavior,
       tightMode: widget.tightMode ?? false,
@@ -241,6 +244,7 @@ class CustomChildWrapper extends StatelessWidget {
     required this.scaleStateCycle,
     this.onTapUp,
     this.onTapDown,
+    this.onDoubleTap,
     this.onScaleEnd,
     required this.outerSize,
     this.gestureDetectorBehavior,
@@ -268,6 +272,7 @@ class CustomChildWrapper extends StatelessWidget {
   final ScaleStateCycle? scaleStateCycle;
   final PhotoViewImageTapUpCallback? onTapUp;
   final PhotoViewImageTapDownCallback? onTapDown;
+  final PhotoViewImageDoubleTapCallback? onDoubleTap;
   final PhotoViewImageScaleEndCallback? onScaleEnd;
   final Size outerSize;
   final HitTestBehavior? gestureDetectorBehavior;
@@ -298,6 +303,7 @@ class CustomChildWrapper extends StatelessWidget {
       scaleBoundaries: scaleBoundaries,
       onTapUp: onTapUp,
       onTapDown: onTapDown,
+      onDoubleTap: onDoubleTap,
       onScaleEnd: onScaleEnd,
       gestureDetectorBehavior: gestureDetectorBehavior,
       tightMode: tightMode ?? false,

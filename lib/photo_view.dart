@@ -251,6 +251,7 @@ class PhotoView extends StatefulWidget {
     this.scaleStateCycle,
     this.onTapUp,
     this.onTapDown,
+    this.onDoubleTap,
     this.onScaleEnd,
     this.customSize,
     this.gestureDetectorBehavior,
@@ -287,6 +288,7 @@ class PhotoView extends StatefulWidget {
     this.scaleStateCycle,
     this.onTapUp,
     this.onTapDown,
+    this.onDoubleTap,
     this.onScaleEnd,
     this.customSize,
     this.gestureDetectorBehavior,
@@ -378,6 +380,9 @@ class PhotoView extends StatefulWidget {
   /// A pointer that might cause a tap has contacted the screen at a particular
   /// location.
   final PhotoViewImageTapDownCallback? onTapDown;
+
+  /// A callback to be invoked on double tap instead of default zoom behaviour
+  final PhotoViewImageDoubleTapCallback? onDoubleTap;
 
   /// A pointer that will trigger a scale has stopped contacting the screen at a
   /// particular location.
@@ -514,6 +519,7 @@ class _PhotoViewState extends State<PhotoView>
                 scaleStateCycle: widget.scaleStateCycle,
                 onTapUp: widget.onTapUp,
                 onTapDown: widget.onTapDown,
+                onDoubleTap: widget.onDoubleTap,
                 onScaleEnd: widget.onScaleEnd,
                 outerSize: computedOuterSize,
                 gestureDetectorBehavior: widget.gestureDetectorBehavior,
@@ -539,6 +545,7 @@ class _PhotoViewState extends State<PhotoView>
                 scaleStateCycle: widget.scaleStateCycle,
                 onTapUp: widget.onTapUp,
                 onTapDown: widget.onTapDown,
+                onDoubleTap: widget.onDoubleTap,
                 onScaleEnd: widget.onScaleEnd,
                 outerSize: computedOuterSize,
                 gestureDetectorBehavior: widget.gestureDetectorBehavior,
@@ -593,6 +600,8 @@ typedef PhotoViewImageTapDownCallback = Function(
   TapDownDetails details,
   PhotoViewControllerValue controllerValue,
 );
+
+typedef PhotoViewImageDoubleTapCallback = Function(BuildContext context);
 
 /// A type definition for a callback when a user finished scale
 typedef PhotoViewImageScaleEndCallback = Function(

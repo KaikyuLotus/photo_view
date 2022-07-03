@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:photo_view/photo_view.dart'
     show
-        PhotoViewScaleState,
         PhotoViewHeroAttributes,
+        PhotoViewImageDoubleTapCallback,
+        PhotoViewImageScaleEndCallback,
         PhotoViewImageTapDownCallback,
         PhotoViewImageTapUpCallback,
-        PhotoViewImageScaleEndCallback,
+        PhotoViewScaleState,
         ScaleStateCycle;
 import 'package:photo_view/src/controller/photo_view_controller.dart';
 import 'package:photo_view/src/controller/photo_view_controller_delegate.dart';
@@ -30,6 +31,7 @@ class PhotoViewCore extends StatefulWidget {
     required this.enableRotation,
     required this.onTapUp,
     required this.onTapDown,
+    required this.onDoubleTap,
     required this.onScaleEnd,
     required this.gestureDetectorBehavior,
     required this.controller,
@@ -52,6 +54,7 @@ class PhotoViewCore extends StatefulWidget {
     required this.enableRotation,
     this.onTapUp,
     this.onTapDown,
+    this.onDoubleTap,
     this.onScaleEnd,
     this.gestureDetectorBehavior,
     required this.controller,
@@ -82,6 +85,7 @@ class PhotoViewCore extends StatefulWidget {
 
   final PhotoViewImageTapUpCallback? onTapUp;
   final PhotoViewImageTapDownCallback? onTapDown;
+  final PhotoViewImageDoubleTapCallback? onDoubleTap;
   final PhotoViewImageScaleEndCallback? onScaleEnd;
 
   final HitTestBehavior? gestureDetectorBehavior;
@@ -206,8 +210,12 @@ class PhotoViewCoreState extends State<PhotoViewCore>
     }
   }
 
-  void onDoubleTap() {
-    nextScaleState();
+  void _onDoubleTap() {
+    if (widget.onDoubleTap != null) {
+      widget.onDoubleTap?.call(context);
+    } else {
+      nextScaleState();
+    }
   }
 
   void animateScale(double from, double to) {
@@ -343,7 +351,7 @@ class PhotoViewCoreState extends State<PhotoViewCore>
 
             return PhotoViewGestureDetector(
               child: child,
-              onDoubleTap: nextScaleState,
+              onDoubleTap: _onDoubleTap,
               onScaleStart: onScaleStart,
               onScaleUpdate: onScaleUpdate,
               onScaleEnd: onScaleEnd,
