@@ -210,9 +210,9 @@ class PhotoViewCoreState extends State<PhotoViewCore>
     }
   }
 
-  void _onDoubleTap() {
+  void _onDoubleTap(Offset offset) {
     if (widget.onDoubleTap != null) {
-      widget.onDoubleTap?.call(context);
+      widget.onDoubleTap?.call(context, offset);
     } else {
       nextScaleState();
     }
