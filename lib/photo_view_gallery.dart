@@ -108,6 +108,7 @@ class PhotoViewGallery extends StatefulWidget {
     Key? key,
     required this.pageOptions,
     this.loadingBuilder,
+    this.loadingWidget,
     this.backgroundDecoration,
     this.wantKeepAlive = false,
     this.gaplessPlayback = false,
@@ -131,6 +132,7 @@ class PhotoViewGallery extends StatefulWidget {
     Key? key,
     required this.itemCount,
     required this.builder,
+    this.loadingWidget,
     this.loadingBuilder,
     this.backgroundDecoration,
     this.wantKeepAlive = false,
@@ -163,6 +165,8 @@ class PhotoViewGallery extends StatefulWidget {
 
   /// Mirror to [PhotoView.loadingBuilder]
   final LoadingBuilder? loadingBuilder;
+
+  final Widget? loadingWidget;
 
   /// Mirror to [PhotoView.backgroundDecoration]
   final BoxDecoration? backgroundDecoration;
@@ -250,7 +254,7 @@ class _PhotoViewGalleryState extends State<PhotoViewGallery> {
             as Future<PhotoViewGalleryPageOptions>,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            return Container();
+            return widget.loadingWidget ?? Container();
           }
           final PhotoViewGalleryPageOptions pageOption = snapshot.data;
           final isCustomChild = pageOption.child != null;
